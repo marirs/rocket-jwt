@@ -1,4 +1,4 @@
-use crate::{backends::Backend, secure::tokenizer::Tokenizer, Result, error::Error};
+use crate::{backends::Backend, error::Error, secure::tokenizer::Tokenizer, Result};
 use clap::{crate_authors, crate_version, Clap};
 use rocket::{data::Limits, Build, Config, Rocket};
 use rocket_okapi::{

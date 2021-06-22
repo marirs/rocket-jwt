@@ -1,5 +1,5 @@
 #![allow(unused_must_use)]
-use crate::{secure::cert::generate_cert, error::Error};
+use crate::{error::Error, secure::cert::generate_cert};
 use serde::{de, Deserialize, Deserializer};
 use std::{fs::File, io::Read, net::IpAddr, path::Path};
 
@@ -29,7 +29,6 @@ pub struct Settings {
 
     /// Application configuration
     pub app: Option<App>,
-
     // Any more sections from the config.yml goes in here
 }
 

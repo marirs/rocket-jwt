@@ -3,9 +3,10 @@ compile_error!("features `crate/postgres` and `crate/sqlite` are mutually exclus
 
 use crate::Result;
 
-use diesel::{r2d2::ConnectionManager};
+use diesel::r2d2::ConnectionManager;
 use r2d2::{Pool, PooledConnection};
 
+/// All user related methods
 mod user;
 
 #[cfg(feature = "postgres")]

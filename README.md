@@ -54,10 +54,10 @@ You can use the feature flag to switch between database use:
 
 ## Switching the database at the backend
 
-Any time you want to perform a database switch, you have to :
-2. Install and run the desired database on your machine if is not already the case
-3. Run migrations
-4. Build the project with the respective feature flag.
+Any time you want to perform a database switch, you have to:
+1. Install and run the desired database on your machine if is not already the case
+2. Run migrations
+3. Build the project with the respective feature flag.
 
 ## Usage
 

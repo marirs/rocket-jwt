@@ -8,7 +8,7 @@ async fn main() -> Result<(), Error> {
     match init_server().await {
         Ok(server) => server.launch().await,
         Err(e) => {
-            println!("{}", e);
+            println!("{}", e.to_string());
             exit(1)
         }
     }

@@ -1,0 +1,12 @@
+language: rust
+os:
+  - linux
+dist: bionic
+rust:
+  - stable
+jobs:
+  fast_finish: true
+script:
+  - cargo build --verbose --no-default-features --features postgres
+  - cargo build --verbose --no-default-features --features sqlite
+  - cargo test --verbose

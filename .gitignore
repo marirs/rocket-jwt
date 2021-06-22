@@ -3,5 +3,7 @@ Thunbs.db
 .idea/
 .vscode/
 
+*.db
+
 target/
 Cargo.lock

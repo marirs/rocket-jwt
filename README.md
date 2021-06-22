@@ -35,15 +35,15 @@ diesel setup
 diesel migration run
 ```
 
-Then build the project with default database `(sqlite)`:
+Then build the project with `default` database `(sqlite)`:
 ```bash
 cargo build --release
 ```
 
-of build with a specific database:
+of build with `postgresql` database:
 
 ``` bash
-cargo build --release --no-default-features --features <postgres|mysql>
+cargo build --release --no-default-features --features postgres
 ```
 
 ## Available `feature` flags

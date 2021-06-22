@@ -1,4 +1,5 @@
 # rocket-jwt
+[![Build Status](https://travis-ci.com/marirs/rocket-jwt.svg?branch=master)](https://travis-ci.com/marirs/rocket-jwt)
 ![GitHub](https://img.shields.io/github/license/marirs/rocket-jwt)
 
 A barebones [Rocket](https://rocket.rs) API with [JWT](https://jwt.io) authentication and 

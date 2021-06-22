@@ -12,7 +12,7 @@ The database integration can be switched between [sqlite](https://www.sqlite.org
   
 ## Setup environment
 
-A `.env.example` at the root directory exposes environment both used by `diesel`and the project itself.  
+A `.env.{db}` at the root directory exposes environment both used by `diesel`and the project itself.  
 Rename it to `.env` then set all the environment variables before running the following commands :
 
 ``` bash

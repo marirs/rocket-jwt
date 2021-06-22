@@ -67,7 +67,7 @@ To print the project usage, an option `-h` is available.
 
 - Get Swagger docs
 ``` http
-GET /swagger
+GET /docs
 ```
 
 - Create a new user
@@ -84,7 +84,7 @@ Authorization: Bearer <token>
 
 - Authenticate
 ```http
-POST /authenticate
+POST /auth
 {
 "username": "string",
 "password": "string"

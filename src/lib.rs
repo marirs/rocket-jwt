@@ -2,6 +2,9 @@
 extern crate rocket;
 
 #[macro_use]
+extern crate rocket_okapi;
+
+#[macro_use]
 extern crate diesel;
 
 #[macro_use]

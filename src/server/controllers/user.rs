@@ -11,9 +11,8 @@ use rocket::{
     serde::json::{self, Json},
     State,
 };
-use rocket_okapi::openapi;
 
-#[openapi]
+#[openapi(tag = "Users")]
 #[post("/auth", data = "<credentials>")]
 pub fn authenticate_user(
     credentials: std::result::Result<Json<UserCredentials>, json::Error<'_>>,
@@ -38,7 +37,7 @@ pub fn authenticate_user(
         })
 }
 
-#[openapi]
+#[openapi(tag = "Users")]
 #[post("/users", data = "<user>")]
 pub fn add_user(
     user: std::result::Result<Json<User>, json::Error<'_>>,
@@ -55,7 +54,7 @@ pub fn add_user(
         .map(|_| Created::new(format!("/users/{}", username)))
 }
 
-#[openapi]
+#[openapi(tag = "Users")]
 #[delete("/users/<username>")]
 pub fn delete_user(
     username: String,
@@ -67,7 +66,7 @@ pub fn delete_user(
     backend.delete_user(&username)
 }
 
-#[openapi]
+#[openapi(tag = "Users")]
 #[get("/users")]
 pub fn get_all_users(
     backend: &State<Backend>,

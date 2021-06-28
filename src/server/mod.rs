@@ -105,9 +105,9 @@ pub async fn init_server() -> Result<Rocket<Build>> {
         ],
     );
 
-    // Add the routes
+    // Add the user routes
     let app = app.mount(
-        "/",
+        "/user",
         routes_with_openapi![
             controllers::user::authenticate_user,
             controllers::user::add_user,

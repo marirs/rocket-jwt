@@ -1,6 +1,6 @@
 use crate::{
     backends::Backend,
-    db::model::{ApiKey, PartialUser, User, UserCredentials, NewPassword},
+    db::model::{ApiKey, NewPassword, PartialUser, User, UserCredentials},
     error::Error,
     secure::tokenizer::{hash, Tokenizer},
     Result,
@@ -41,7 +41,24 @@ pub fn authenticate_user(
 }
 
 #[openapi(tag = "Users")]
-#[post("/users", data = "<user>")]
+#[get("/")]
+pub fn get_all_users(
+    backend: &State<Backend>,
+    api_key: std::result::Result<ApiKey, Error>,
+) -> Result<Json<Vec<PartialUser>>> {
+    let _ = api_key?;
+
+    Ok(Json(
+        backend
+            .list_users()?
+            .into_iter()
+            .map(PartialUser::from)
+            .collect(),
+    ))
+}
+
+#[openapi(tag = "Users")]
+#[post("/", data = "<user>")]
 pub fn add_user(
     user: std::result::Result<Json<User>, json::Error<'_>>,
     api_key: std::result::Result<ApiKey, Error>,
@@ -61,7 +78,7 @@ pub fn add_user(
 }
 
 #[openapi(tag = "Users")]
-#[post("/users/change_password", data = "<password>")]
+#[post("/change_password", data = "<password>")]
 pub fn change_user_password(
     password: std::result::Result<Json<NewPassword>, json::Error<'_>>,
     api_key: std::result::Result<ApiKey, Error>,
@@ -87,7 +104,7 @@ pub fn change_user_password(
 }
 
 #[openapi(tag = "Users")]
-#[delete("/users/<username>")]
+#[delete("/<username>")]
 pub fn delete_user(
     username: String,
     api_key: std::result::Result<ApiKey, Error>,
@@ -96,21 +113,4 @@ pub fn delete_user(
     let _ = api_key?;
 
     backend.delete_user(&username)
-}
-
-#[openapi(tag = "Users")]
-#[get("/users")]
-pub fn get_all_users(
-    backend: &State<Backend>,
-    api_key: std::result::Result<ApiKey, Error>,
-) -> Result<Json<Vec<PartialUser>>> {
-    let _ = api_key?;
-
-    Ok(Json(
-        backend
-            .list_users()?
-            .into_iter()
-            .map(PartialUser::from)
-            .collect(),
-    ))
 }

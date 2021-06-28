@@ -1,11 +1,16 @@
 use crate::error::Error;
 
 use jwt_simple::prelude::*;
+use sha2::{Digest, Sha256};
 
 #[derive(Clone)]
 pub struct Tokenizer {
     key: HS256Key,
     token_expiration: Duration,
+}
+
+pub fn hash(data: &str) -> String {
+    format!("{:x}", Sha256::digest(data.as_bytes()))
 }
 
 impl Tokenizer {

@@ -18,6 +18,7 @@ r2d2 = "0.8.9"
 rocket = { version = "0.5.0-rc.1", features = ["json", "secrets", "tls"] }
 rocket_okapi = "0.7.0-alpha-1"
 schemars = "0.8.3"
+sha2 = "0.9.5"
 serde = { version = "1.0.126", features = ["derive"] }
 thiserror = "1.0.25"
 

@@ -23,7 +23,7 @@ pub struct Settings {
     #[serde(default)]
     pub server: ServerConfig,
 
-    /// Server config related parameters
+    /// SSL Configuration
     #[serde(default, deserialize_with = "configure_ssl")]
     pub ssl: Option<SslConfig>,
 

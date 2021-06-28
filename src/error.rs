@@ -41,6 +41,8 @@ pub enum Error {
     ConfigFileNotFound,
     #[error("Error getting ssl certificates")]
     SslCertificateError,
+    #[error("Empty DB Url")]
+    EmptyDBUrl,
     #[error("{0}")]
     Config(#[from] config::ConfigError),
     #[error("{0}")]

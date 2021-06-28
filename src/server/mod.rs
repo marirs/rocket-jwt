@@ -53,6 +53,12 @@ fn parse_settings_from_cli() -> Result<Settings> {
 pub async fn init_server() -> Result<Rocket<Build>> {
     let settings = parse_settings_from_cli()?;
 
+    let app_settings = settings.app.unwrap_or_default();
+
+    if app_settings.db_url.is_empty() {
+        return Err(Error::EmptyDBUrl)
+    }
+
     let token_expires = parse_duration::parse(&settings.server.jwt_token_expiry)?;
     let jwt_secret = settings.server.secret_key.to_owned();
 
@@ -135,7 +141,7 @@ pub async fn init_server() -> Result<Rocket<Build>> {
             Some(&settings.server.secret_key),
         ))
         // add the Backend to the state
-        .manage(Backend::new(&settings.app.unwrap_or_default().db_url)?);
+        .manage(Backend::new(&app_settings.db_url)?);
 
     // Return the configured Rocket App
     Ok(app)

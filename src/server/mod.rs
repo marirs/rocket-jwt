@@ -112,6 +112,7 @@ pub async fn init_server() -> Result<Rocket<Build>> {
             controllers::user::authenticate_user,
             controllers::user::add_user,
             controllers::user::delete_user,
+            controllers::user::change_user_password,
             controllers::user::get_all_users,
         ],
     );

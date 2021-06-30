@@ -42,10 +42,19 @@ Then build the project with `default` database `(sqlite)`:
 cargo build --release
 ```
 
-of build with `postgresql` database:
+or build with `postgresql` database:
 
 ``` bash
-cargo build --release --no-default-features --features postgres
+$ cargo build --release --no-default-features --features postgres
+```
+
+## Create the first user
+```bash
+# Build the create-user binary
+cargo build --release --features create-user-binary
+
+# Execute the binary to create the first admin user
+../target/release/create-user
 ```
 
 ## Available `feature` flags
@@ -53,6 +62,9 @@ You can use the feature flag to switch between database use:
 
 - sqlite (default)
 - postgres
+
+To build the create-user binary
+- create-user-binary
 
 ## Switching the database at the backend
 

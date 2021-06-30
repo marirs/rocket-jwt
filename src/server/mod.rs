@@ -18,7 +18,7 @@ mod guards;
 mod config;
 use self::config::Settings;
 
-#[derive(Clap, Debug)]
+#[derive(Clap)]
 #[clap(version = crate_version!(), author = crate_authors!())]
 struct CliOpts {
     #[clap(short = 'c', long, about = "loads the server configurations")]
@@ -26,11 +26,11 @@ struct CliOpts {
 }
 
 /// Parse the settings from the command line arguments
-// fn parse_settings_from_cli() -> Result<Settings, String> {
 fn parse_settings_from_cli() -> Result<Settings> {
     // parse the cli options
     let cli_opts = CliOpts::parse();
     let cfg_file = &cli_opts.config.unwrap_or_default();
+
     if cfg_file.is_empty() {
         // No config file, so start
         // with default settings
@@ -44,7 +44,7 @@ fn parse_settings_from_cli() -> Result<Settings> {
             Settings::from_file(&cfg_file)
         } else {
             // config file does not exist, quit app
-            Err(Error::ConfigFileNotFound)
+            return Err(Error::ConfigFileNotFound)
         }
     }
 }
@@ -127,7 +127,7 @@ pub async fn init_server() -> Result<Rocket<Build>> {
     let app = app.mount(
         "/docs/",
         make_swagger_ui(&SwaggerUIConfig {
-            url: "../openapi.json".to_owned(),
+            url: "../user/openapi.json".to_owned(),
             ..Default::default()
         }),
     );

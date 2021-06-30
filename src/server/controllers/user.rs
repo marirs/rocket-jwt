@@ -74,7 +74,7 @@ pub fn add_user(
             password: hash(&user.password),
             ..user.into_inner()
         })
-        .map(|_| Created::new(format!("/users/{}", username)))
+        .map(|_| Created::new(format!("/user/{}", username)))
 }
 
 #[openapi(tag = "Users")]

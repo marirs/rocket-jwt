@@ -10,9 +10,9 @@ extern crate diesel;
 #[macro_use]
 pub(crate) mod macros;
 
-pub(crate) mod backends;
-pub(crate) mod db;
-pub(crate) mod secure;
+pub mod backends;
+pub mod db;
+pub mod secure;
 
 pub mod server;
 

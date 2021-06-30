@@ -1,2 +1,2 @@
 pub(crate) mod cert;
-pub(crate) mod tokenizer;
+pub mod tokenizer;

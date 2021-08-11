@@ -1,4 +1,5 @@
 # rocket-jwt
+[![CI](https://github.com/marirs/rocket-jwt/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/marirs/rocket-jwt/actions/workflows/ci.yml)
 [![Build Status](https://travis-ci.com/marirs/rocket-jwt.svg?branch=master)](https://travis-ci.com/marirs/rocket-jwt)
 ![GitHub](https://img.shields.io/github/license/marirs/rocket-jwt)
 

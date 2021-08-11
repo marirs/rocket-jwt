@@ -1,0 +1,42 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-mac-nix-win:
+    name: Test Rust ${{ matrix.rust }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - { rust: stable, os: macos-latest }
+        - { rust: stable, os: ubuntu-latest }
+        - { rust: stable, os: windows-latest }
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/cargo@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          command: test
+
+  nix_arm7:
+    name: Linux ARMv7
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: armv7-unknown-linux-gnueabihf
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: test
+          args: --target armv7-unknown-linux-gnueabihf
+

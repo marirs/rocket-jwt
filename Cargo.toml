@@ -1,6 +1,6 @@
 [package]
 name = "rocketjwt"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "Barebones Rocket API Server with JWT auth"
 keywords = ["rocket", "api", "jwt"]
@@ -12,7 +12,7 @@ config = "0.11.0"
 diesel = { version = "1.4.7", optional = true }
 jwt-simple = "0.10.1"
 okapi = { version = "0.6.0-alpha-1", features = ["derive_json_schema"] }
-openssl = "0.10.35"
+openssl = { version = "0.10", features = ["vendored"] }
 parse_duration = "2.1.1"
 r2d2 = "0.8.9"
 rocket = { version = "0.5.0-rc.1", features = ["json", "secrets", "tls"] }
@@ -22,11 +22,12 @@ schemars = "0.8.3"
 sha2 = "0.9.5"
 serde = { version = "1.0.126", features = ["derive"] }
 thiserror = "1.0.25"
+libsqlite3-sys = { version = ">=0.8.0, <0.23.0", optional = true, features = ["min_sqlite_version_3_7_16"] }
 
 [features]
 default = ["sqlite"]
 postgres = ["diesel/postgres", "diesel/r2d2"]
-sqlite = ["diesel/sqlite", "diesel/r2d2"]
+sqlite = ["diesel/sqlite", "diesel/r2d2", "libsqlite3-sys/bundled"]
 create-user-binary = ["rpassword"]
 
 [[bin]]

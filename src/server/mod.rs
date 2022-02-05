@@ -1,5 +1,5 @@
 use crate::{backends::Backend, error::Error, secure::tokenizer::Tokenizer, Result};
-use clap::{crate_authors, crate_version, Clap};
+use clap::Parser;
 use rocket::{data::Limits, Build, Config, Rocket};
 use rocket_okapi::{
     routes_with_openapi,
@@ -18,10 +18,11 @@ mod guards;
 mod config;
 use self::config::Settings;
 
-#[derive(Clap)]
-#[clap(version = crate_version!(), author = crate_authors!())]
+#[derive(Parser, Debug)]
+#[clap(author, version, about)]
 struct CliOpts {
-    #[clap(short = 'c', long, about = "loads the server configurations")]
+    /// loads the server configurations
+    #[clap(short = 'c', long)]
     config: Option<String>,
 }
 
@@ -44,7 +45,7 @@ fn parse_settings_from_cli() -> Result<Settings> {
             Settings::from_file(&cfg_file)
         } else {
             // config file does not exist, quit app
-            return Err(Error::ConfigFileNotFound)
+            Err(Error::ConfigFileNotFound)
         }
     }
 }

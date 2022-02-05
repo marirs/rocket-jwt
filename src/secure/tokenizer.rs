@@ -35,7 +35,7 @@ impl Tokenizer {
     pub fn verify(&self, token: &str) -> Result<String, Error> {
         Ok(self
             .key
-            .verify_token::<NoCustomClaims>(&token, None)
+            .verify_token::<NoCustomClaims>(token, None)
             .map(|_| token.to_string())?)
     }
 }

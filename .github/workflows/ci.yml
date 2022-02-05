@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - main
+    paths-ignore:
+      - '**/README.md'
+      - '**/.gitignore'
 
 jobs:
   build-mac-nix-win:

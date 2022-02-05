@@ -1,16 +1,16 @@
 [package]
 name = "rocketjwt"
-version = "0.1.2"
+version = "0.2.1"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "Barebones Rocket API Server with JWT auth"
 keywords = ["rocket", "api", "jwt"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
-clap = "3.0.0-beta.2"
+clap = { version = "3.0.14", features = ["cargo", "derive"] }
 config = "0.11.0"
-diesel = { version = "1.4.7", optional = true }
-jwt-simple = "0.10.1"
+diesel = { version = "1.4.8", optional = true }
+jwt-simple = "0.10.8"
 okapi = { version = "0.6.0-alpha-1", features = ["derive_json_schema"] }
 openssl = { version = "0.10", features = ["vendored"] }
 parse_duration = "2.1.1"
@@ -18,10 +18,10 @@ r2d2 = "0.8.9"
 rocket = { version = "0.5.0-rc.1", features = ["json", "secrets", "tls"] }
 rocket_okapi = "0.7.0-alpha-1"
 rpassword = { version = "5.0.1", optional = true }
-schemars = "0.8.3"
-sha2 = "0.9.5"
-serde = { version = "1.0.126", features = ["derive"] }
-thiserror = "1.0.25"
+schemars = "0.8.8"
+sha2 = "0.10.1"
+serde = { version = "1.0.136", features = ["derive"] }
+thiserror = "1.0.30"
 libsqlite3-sys = { version = ">=0.8.0, <0.23.0", optional = true, features = ["min_sqlite_version_3_7_16"] }
 
 [features]

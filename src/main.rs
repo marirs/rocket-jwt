@@ -11,5 +11,6 @@ async fn main() -> Result<(), Error> {
             println!("{}", e);
             exit(1)
         }
-    }
+    }.expect("Server failed to start!");
+    Ok(())
 }

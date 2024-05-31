@@ -7,22 +7,22 @@ keywords = ["rocket", "api", "jwt"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "3.0.14", features = ["cargo", "derive"] }
-config = "0.11.0"
-diesel = { version = "1.4.8", optional = true }
-jwt-simple = "0.10.8"
-okapi = { version = "0.6.0-alpha-1", features = ["derive_json_schema"] }
+clap = { version = "4", features = ["cargo", "derive"] }
+config = "0.14.0"
+diesel = { version = "2.1.6", optional = true }
+jwt-simple = "0.12.9"
+okapi = { version = "0.7", features = ["impl_json_schema"] }
 openssl = { version = "0.10", features = ["vendored"] }
 parse_duration = "2.1.1"
-r2d2 = "0.8.9"
-rocket = { version = "0.5.0-rc.1", features = ["json", "secrets", "tls"] }
-rocket_okapi = "0.7.0-alpha-1"
-rpassword = { version = "5.0.1", optional = true }
-schemars = "0.8.8"
-sha2 = "0.10.1"
+r2d2 = "0.8"
+rocket = { version = "0.5", features = ["json", "secrets", "tls"] }
+rocket_okapi = { version="0.8.0-rc.3" , features = ["swagger"]}
+rpassword = { version = "7.3", optional = true }
+schemars = { version="0.8.21" , features = ["impl_json_schema"]}
+sha2 = "0.10.8"
 serde = { version = "1.0.136", features = ["derive"] }
 thiserror = "1.0.30"
-libsqlite3-sys = { version = ">=0.8.0, <0.23.0", optional = true, features = ["min_sqlite_version_3_7_16"] }
+libsqlite3-sys = { version = ">=0.17.2, <0.29.0", optional = true, features = ["min_sqlite_version_3_14_0"] }
 
 [features]
 default = ["sqlite"]

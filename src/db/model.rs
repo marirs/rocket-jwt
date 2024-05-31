@@ -13,8 +13,7 @@ use serde::{Deserialize, Serialize};
     AsChangeset,
     JsonSchema,
 )]
-#[table_name = "users"]
-#[primary_key(username)]
+#[diesel(table_name = users, primary_key(username))]
 pub struct User {
     pub username: String,
     pub email: String,
@@ -53,7 +52,7 @@ pub struct NewPassword {
     pub new: String,
 }
 
-#[derive(Serialize, Deserialize, JsonSchema)]
+#[derive(Serialize, Deserialize, OpenApiFromRequest, JsonSchema)]
 pub struct ApiKey {
     pub token: String,
 }

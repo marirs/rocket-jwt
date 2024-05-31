@@ -2,7 +2,7 @@ use crate::{backends::Backend, error::Error, secure::tokenizer::Tokenizer, Resul
 use clap::Parser;
 use rocket::{data::Limits, Build, Config, Rocket};
 use rocket_okapi::{
-    routes_with_openapi,
+    openapi_get_routes,
     swagger_ui::{make_swagger_ui, SwaggerUIConfig},
 };
 use std::path::Path;
@@ -12,7 +12,7 @@ mod catchers;
 /// All the Routes/endpoints
 mod controllers;
 /// All required Guards
-mod guards;
+pub(crate) mod guards;
 
 /// Server & App Configurations
 mod config;
@@ -115,7 +115,7 @@ pub async fn init_server() -> Result<Rocket<Build>> {
     // Add the user routes
     let app = app.mount(
         "/user",
-        routes_with_openapi![
+        openapi_get_routes![
             controllers::user::authenticate_user,
             controllers::user::add_user,
             controllers::user::delete_user,

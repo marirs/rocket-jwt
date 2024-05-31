@@ -1,6 +1,6 @@
 use rocket::{
     http::Status,
-    outcome::{try_outcome, IntoOutcome},
+    outcome::{try_outcome},
     request::{FromRequest, Outcome, Request},
     State,
 };
@@ -15,14 +15,14 @@ impl<'r> FromRequest<'r> for ApiKey {
         let tokenizer = try_outcome!(request
             .guard::<&State<Tokenizer>>()
             .await
-            .map_failure(|_| (Status::InternalServerError, Error::InternalError)));
+            .map_error(|_| (Status::InternalServerError, Error::InternalError)));
 
         let backend = try_outcome!(request
             .guard::<&State<Backend>>()
             .await
-            .map_failure(|_| (Status::InternalServerError, Error::InternalError)));
+            .map_error(|_| (Status::InternalServerError, Error::InternalError)));
 
-        request
+        match request
             .headers()
             .get_one("Authorization")
             .map(|header| header.split("Bearer").collect::<Vec<_>>())
@@ -40,7 +40,11 @@ impl<'r> FromRequest<'r> for ApiKey {
                 Ok(user) if user.is_admin => Ok(ApiKey { token }),
                 Ok(_) => Err(Error::ForbiddenAccess),
                 Err(_) => Err(Error::UnauthenticatedUser),
-            })
-            .into_outcome(Status::BadRequest)
+            }) {
+            Ok(api_key) => Outcome::Success(api_key),
+            Err(e) => Outcome::Error((Status::Unauthorized, e)),
+        }
+
     }
 }
+

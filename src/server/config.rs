@@ -41,12 +41,21 @@ impl Settings {
         //! Settings::from_file("config.yml");
         //! ```
         //!
-        let mut cfg = config::Config::default();
-        cfg.merge(config::File::with_name(path.as_ref().to_str().unwrap()))?;
+        let builder = config::Config::builder()
+            .add_source(config::File::with_name(path.as_ref().to_str().unwrap()));
+        let cfg = builder.build()?;
         match cfg.try_into() {
             Ok(c) => Ok(c),
             Err(_e) => Err(Error::ConfigurationError),
         }
+    }
+}
+
+impl TryFrom<config::Config> for Settings {
+    type Error = Error;
+
+    fn try_from(cfg: config::Config) -> Result<Self, Self::Error> {
+        cfg.try_into().map_err(|_| Error::ConfigurationError)
     }
 }
 

@@ -10,7 +10,8 @@ edition = "2021"
 clap = { version = "4", features = ["cargo", "derive"] }
 config = "0.14.0"
 diesel = { version = "2.1.6", optional = true }
-jwt-simple = "0.12.9"
+# Avoid linking BoringSSL alongside the application OpenSSL dependency.
+jwt-simple = { version = "0.12.9", default-features = false, features = ["pure-rust"] }
 okapi = { version = "0.7", features = ["impl_json_schema"] }
 openssl = { version = "0.10", features = ["vendored"] }
 parse_duration = "2.1.1"
